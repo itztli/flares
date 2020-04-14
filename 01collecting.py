@@ -35,7 +35,7 @@ plt.ylim(1e-9,1e-2)
 plt.yscale("log")
 
 fig.savefig(arguments[1]+"/x-ray-flux.png")
-plt.show()
+#plt.show()
 
 #information = data[0]
 
