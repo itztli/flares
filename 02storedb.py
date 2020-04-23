@@ -4,6 +4,7 @@ from mysql.connector import errorcode
 import json
 import glob
 import xml.etree.ElementTree as ET
+import datetime
 
 PATH='/home/vdelaluz/public_html/static/'
 
@@ -15,7 +16,11 @@ for filename in glob.glob(PATH+"*.xml"):
     print(filename)
     tree = ET.parse(filename)
     root = tree.getroot()
-    print(root[0])
+    datetime = datetime.datetime.strptime(root[0].text,'%Y-%m-%dT%H:%M:%SZ')
+    flux = float(root[1].text)
+    satellite = root[2].text
+    print(datetime)
+
         
 #    
 #
