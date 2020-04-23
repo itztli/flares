@@ -9,9 +9,12 @@ import subprocess
 
 PATH='/home/vdelaluz/public_html/static/'
 
-with open("db.json", "w") as write_file:
-    json.dump(config, write_file)
+#with open("db.json", "w") as write_file:
+#    json.dump(config, write_file)
 
+with open('db.json') as json_file:
+    config = json.load(json_file)
+    
 try:
     cnx = mysql.connector.connect(**config)
     cursor = cnx.cursor()
