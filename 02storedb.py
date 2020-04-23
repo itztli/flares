@@ -5,21 +5,43 @@ import json
 import glob
 import xml.etree.ElementTree as ET
 import datetime
+import subprocess
 
 PATH='/home/vdelaluz/public_html/static/'
 
 #with open("db.json", "w") as write_file:
 #    json.dump(config, write_file)
 
+try:
+    cnx = mysql.connector.connect(**config)
+    cursor = cnx.cursor()
+    query = ("INSERT INTO FluxHighEnergy VALUES(%s, %s, %s)")
 
-for filename in glob.glob(PATH+"*.xml"):
-    print(filename)
-    tree = ET.parse(filename)
-    root = tree.getroot()
-    mydate = datetime.datetime.strptime(root[0].text,'%Y-%m-%dT%H:%M:%SZ')
-    flux = float(root[1].text)
-    satellite = root[2].text
-    print(mydate)
+    for filename in glob.glob(PATH+"*.xml"):
+        print(filename)
+        tree = ET.parse(filename)
+        root = tree.getroot()
+        mydate = datetime.datetime.strptime(root[0].text,'%Y-%m-%dT%H:%M:%SZ')
+        flux = float(root[1].text)
+        satellite = int(root[2].text)
+        data_query = (mydate, flux, satellite)
+
+        #print(mydate)
+        cursor.execute(query,data_query)    
+        output = subprocess.run(["mv",filename,PATH+"backup/"])
+
+
+
+        
+except mysql.connector.Error as err:
+    if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+        print("Something is wrong with your user name or password")
+    elif err.errno == errorcode.ER_BAD_DB_ERROR:
+        print("Database does not exist")
+    else:
+        print(err)
+else:
+    cnx.close()
 
         
 #    
