@@ -15,7 +15,7 @@ for filename in glob.glob(PATH+"*.xml"):
     print(filename)
     tree = ET.parse(filename)
     root = tree.getroot()
-    print(root.tag)
+    print(root[0])
         
 #    
 #
