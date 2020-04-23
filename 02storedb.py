@@ -3,6 +3,7 @@ import mysql.connector
 from mysql.connector import errorcode
 import json
 import glob
+import xml.etree.ElementTree as ET
 
 PATH='/home/vdelaluz/public_html/static/'
 
@@ -12,8 +13,10 @@ PATH='/home/vdelaluz/public_html/static/'
 
 for filename in glob.glob(PATH+"*.xml"):
     print(filename)
-
-
+    tree = ET.parse(filename)
+    root = tree.getroot()
+    print(root.tag)
+        
 #    
 #
 #
