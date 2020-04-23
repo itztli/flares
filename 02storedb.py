@@ -4,7 +4,7 @@ from mysql.connector import errorcode
 import json
 import glob
 import xml.etree.ElementTree as ET
-from datetime import datetime
+import datetime
 
 PATH='/home/vdelaluz/public_html/static/'
 
