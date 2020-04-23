@@ -19,7 +19,7 @@ for filename in glob.glob(PATH+"*.xml"):
     mydate = datetime.datetime.strptime(root[0].text,'%Y-%m-%dT%H:%M:%SZ')
     flux = float(root[1].text)
     satellite = root[2].text
-    print(datetime)
+    print(mydate)
 
         
 #    
