@@ -20,7 +20,7 @@ with open('db.json') as json_file:
 try:
     cnx = mysql.connector.connect(**config)
     cursor = cnx.cursor()
-    query = ("SELECT * FROM FluxHighEnergy WHERE flux > 0.00000002")
+    query = ("SELECT time_tag, flux FROM FluxHighEnergy WHERE flux > 0.00000002")
     #data_query = (mydate, flux, satellite)
     #print(mydate)
     cursor.execute(query)#,data_query)
