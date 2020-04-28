@@ -18,7 +18,7 @@ with open('db.json') as json_file:
 try:
     cnx = mysql.connector.connect(**config)
     cursor = cnx.cursor()
-    query = ("INSERT INTO FluxHighEnergy VALUES(%s, %s, %s)")
+    query = ("INSERT INTO FluxHighEnergy(time_tag, flux, satellite) VALUES(%s, %s, %s)")
 
     for filename in glob.glob(PATH+"*.xml"):
         print(filename)
@@ -30,7 +30,8 @@ try:
         data_query = (mydate, flux, satellite)
 
         #print(mydate)
-        cursor.execute(query,data_query)    
+        cursor.execute(query,data_query)
+        cnx.commit()
         output = subprocess.run(["mv",filename,PATH+"backup/"])
 
 
