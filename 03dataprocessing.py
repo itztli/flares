@@ -9,6 +9,7 @@ import xml.etree.ElementTree as ET
 import datetime
 import subprocess
 import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 
